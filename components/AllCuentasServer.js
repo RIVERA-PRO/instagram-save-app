@@ -15,8 +15,8 @@ export default function AllCuentasServer() {
             fetch('https://count-save.onrender.com/users')
                 .then(response => response.json())
                 .then(data => {
-                    const randomUsers = getRandomUsers(data.users, 100);
-                    setUsers(randomUsers);
+
+                    setUsers(data.users.reverse());
                     setLoading(false);
                 })
                 .catch(error => {
@@ -27,10 +27,6 @@ export default function AllCuentasServer() {
         }, 2000); // Simular tiempo de carga de 2 segundos
     };
 
-    const getRandomUsers = (users, count) => {
-        const shuffledUsers = users.sort(() => 0.5 - Math.random());
-        return shuffledUsers.slice(0, count);
-    };
 
     const showErrorAlert = () => {
         Alert.alert(
